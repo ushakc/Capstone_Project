@@ -7,3 +7,5 @@ and will be loaded into Mariadb with spark using JDBC API
 
 Created virtual environment for the project. The username and password for the maria db are stored in secret.txt and pushed into gitignore
 
+
+
