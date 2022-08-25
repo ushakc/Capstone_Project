@@ -391,7 +391,7 @@ if __name__ == "__main__":
 
     fd = functionaldetails()
     host='localhost'
-    database='project_db'
+    database='creditcard_capstone'
     # read the database username and password from secret.txt
     secrets_file = os.path.join("files", "secret.txt")
     with open(secrets_file, "r") as f:		
@@ -402,6 +402,8 @@ if __name__ == "__main__":
             user = words[1].strip()
         elif (words[0] == "password"):
             password = words[1].strip()
+        else:
+            database = words[1].strip()
     f.close()
     dbconn = fd.get_database_connection(host, database, user, password)
 
@@ -410,7 +412,7 @@ if __name__ == "__main__":
     while(option != '8' ):
         print("\nList of Options:")
         print("----------------")
-        print('1)   Used to display the transactions made by customers living in a given zip code for a given month and year. \
+        print('1)    Used to display the transactions made by customers living in a given zip code for a given month and year. \
                                                     Order by day in descending order. \
             \n2)    Used to display the number and total values of transactions for a given type. \
             \n3)    Used to display the number and total values of transactions for branches in a given state.\
@@ -423,28 +425,35 @@ if __name__ == "__main__":
         if (option == '1'):
             zipcode,month,year = fd.get_user_input()
             records = fd.total_customers(zipcode,year,month,dbconn)
+            dbconn.close()
         elif (option == '2'):
             tn_type = fd.get_tn_type_input(dbconn)
             records = fd.transaction_value(dbconn,tn_type)
+            dbconn.close()
         elif (option == '3'):
             branch_state = fd.get_branch_input(dbconn)
             records = fd.transaction_value_branch(branch_state,dbconn)
+            dbconn.close()
         elif (option == '4'):
             record_ssn,ssn,lastname = fd.get_input(dbconn)
             records = fd.customer_details(dbconn,ssn,lastname)
+            dbconn.close()
 
         elif (option == '5'):
             record_ssn,ssn,lastname = fd.get_input(dbconn)
             records = fd.customer_details(dbconn,ssn,lastname)
             fd.modify_customer_details(dbconn,records)
+            dbconn.close()
         elif (option == '6'):
             record_ssn,ssn,lastname = fd.get_input(dbconn)
             month,year = fd.get_monthyear()
             records = fd.monthly_bill_per_year(dbconn,year,month,record_ssn)
+            dbconn.close()
         elif (option == '7'):
             start,end = fd.get_range(dbconn)
             record_ssn,ssn,lastname = fd.get_input(dbconn)
             records = fd.monthly_bill_between_dates(dbconn,start,end,record_ssn)
+            dbconn.close()
         elif (option == '8'):
             dbconn.close()
             print('THANK YOU')
