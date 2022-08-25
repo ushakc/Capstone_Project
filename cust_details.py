@@ -22,7 +22,7 @@ class functionaldetails():
         zip_code = input("Enter Your Zip Code:  ")
         while (flag):
             if not zip_code.isdigit():
-                zip_code = input('enter a valid zipcode')
+                zip_code = input('enter a valid zipcode:  ')
             else:
                 flag=False
         
@@ -34,7 +34,7 @@ class functionaldetails():
             else:
                 flag = False
                 
-        transaction_month = input("Enter the month in the form (XX): ").zfill(2)
+        transaction_month = input("Enter the month in the form (XX):  ").zfill(2)
         flag = True
         while (flag):
             if  not transaction_month.isdigit():
@@ -120,7 +120,7 @@ class functionaldetails():
         records = cursor.fetchall()
         
         if len(records) == 0:
-            print('Could find any account details with given input')
+            print('Could find any account with given details.')
         
         return(records[0][0],ssn,lastname)
 
@@ -171,7 +171,7 @@ class functionaldetails():
                 else:
                     flag = False
 
-            end_date = input("Enter the end date in the form (XXXXXXXX): ")
+            end_date = input("Enter the end date in the form (XXXXXXXX):  ")
             flag = True
             while (flag):
                 if not end_date.isdigit() or len(end_date)!=8:
@@ -194,7 +194,7 @@ class functionaldetails():
         print("\n List of  customer transactions in a given Zip code : ")
         print("\n\n Customer no\t\tdate\t   cust_ssn  code  type       value  id")
         if len(records) == 0:
-            print('No records found with the given input')
+            print('No records found with the given details.')
         else:
             for row in records:
                 print(row)
@@ -206,9 +206,9 @@ class functionaldetails():
 
         cursor.execute(query,(tn_type,))
         records = cursor.fetchall()
-        print("\n Number of transactions and total value for transaction type " + tn_type + " : ")
+        print("\n Number of transactions and total value for transaction type of " + tn_type + " : ")
         if len(records) == 0:
-            print('No records found witht th given input')
+            print('No records found with the given details.')
         else:
             print(records)
         return(records)
@@ -224,7 +224,7 @@ class functionaldetails():
         cursor.execute(query,(branch_state,))
         records = cursor.fetchall()
         if len(records) ==0:
-            print('No recods found with the given input')
+            print('No recods found with the given details.')
         else:
             for row in records:
                 print(row)
@@ -264,7 +264,7 @@ class functionaldetails():
         records = cursor.fetchall()
         print("\n List of  customer transactions on a given credit card number : ")
         if len(records) == 0:
-            print("No records found with the given input")
+            print("No records found with the given details.")
         else:
             print(records)
         return(records)
@@ -282,7 +282,7 @@ class functionaldetails():
         cursor.execute(query,(cust_ssn,start_date,end_date,))
         records = cursor.fetchall()
         if len(records) == 0:
-            print('No records found for the given input')
+            print('No records found for the given details.')
         else:
             print("\n List of  customer transactions on a given credit card number : ")
             for row in records:
@@ -378,7 +378,7 @@ class functionaldetails():
         print("Ph No:\t\t" + records[0][10])
         print("Email:\t\t" + records[0][11])
 
-        #database.commit()
+        dbconn.commit()
 
         cursor.close()   
 
@@ -410,8 +410,6 @@ if __name__ == "__main__":
 
     while(option != '8' ):
         
-        dbconn = fd.get_database_connection(host, database, user, password)
-
         print("\nList of Options:")
         print("----------------")
         print('1)    Used to display the transactions made by customers living in a given zip code for a given month and year. \
@@ -427,62 +425,34 @@ if __name__ == "__main__":
         if (option == '1'):
             zipcode,month,year = fd.get_user_input()
             records = fd.total_customers(zipcode,year,month,dbconn)
-            dbconn.close()
         elif (option == '2'):
             tn_type = fd.get_tn_type_input(dbconn)
             records = fd.transaction_value(dbconn,tn_type)
-            dbconn.close()
         elif (option == '3'):
             branch_state = fd.get_branch_input(dbconn)
             records = fd.transaction_value_branch(branch_state,dbconn)
-            dbconn.close()
         elif (option == '4'):
             record_ssn,ssn,lastname = fd.get_input(dbconn)
             records = fd.customer_details(dbconn,ssn,lastname)
-            dbconn.close()
-
         elif (option == '5'):
             record_ssn,ssn,lastname = fd.get_input(dbconn)
             records = fd.customer_details(dbconn,ssn,lastname)
             fd.modify_customer_details(dbconn,records)
-            dbconn.close()
         elif (option == '6'):
             record_ssn,ssn,lastname = fd.get_input(dbconn)
             month,year = fd.get_monthyear()
             records = fd.monthly_bill_per_year(dbconn,year,month,record_ssn)
-            dbconn.close()
         elif (option == '7'):
             start,end = fd.get_range(dbconn)
             record_ssn,ssn,lastname = fd.get_input(dbconn)
             records = fd.monthly_bill_between_dates(dbconn,start,end,record_ssn)
-            dbconn.close()
         elif (option == '8'):
             dbconn.close()
             print('THANK YOU')
             break
         else:
-            print('Invalid Input.Please try again')
+            print('Invalid Input.\nPlease try again.')
             continue
-        print("\npress Enter to continue")
+        print("\nPress Enter to Continue.")
         input()
     
-
-
-
-    # lastname = args.lastname
-    # ssn = args.ssnlastfour
-    # read from file, atleast the secret arguments
-    # get customer account details
-    # if args.getacct:
-    #     records = fd.get_customer_details(dbconn, ssn, lastname)
-    #     cd.print_cust_details(records)
-    # # update customer account details
-    # if args.updateacct:
-    #     records = fd.get_customer_details(dbconn, ssn, lastname)
-    #     print("Accept the value or provide an updated value:")
-    #     displaystr = "Ph No (" + records[0][10] + "): "
-    #     newphone = input(displaystr)
-    #     if (newphone):
-    #         print(newphone)
-    #     else:
-    #         print("keeping existing value")
