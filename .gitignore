@@ -131,3 +131,7 @@ dmypy.json
 # Mysql Database user and password
 secret.txt
 files
+
+#
+.DS_Store
+.history
