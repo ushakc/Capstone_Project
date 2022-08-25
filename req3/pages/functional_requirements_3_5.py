@@ -17,9 +17,9 @@ from pyspark.sql.functions import *
 dash.register_page(__name__)
 
 markdown_text = '''
-### Functional Requirements 3.3
-Find and plot the sum of all transactions for each customer, 
-and which customer has the highest transaction amount. (First 20)
+### Functional Requirements 3.5
+Find and plot each branches healthcare transactions, showing which branch 
+processed the highest total dollar value of health care transactions (First 20)
 '''
 
 # get the database username and password from secret.txt
