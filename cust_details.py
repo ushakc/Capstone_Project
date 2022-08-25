@@ -30,7 +30,7 @@ class functionaldetails():
         flag=True
         while (flag):
             if not transaction_year.isdigit() or len(transaction_year)!=4:
-                transaction_year = input("Enter valid year format XXXX")
+                transaction_year = input("Enter valid year format XXXX:  ")
             else:
                 flag = False
                 
@@ -38,7 +38,7 @@ class functionaldetails():
         flag = True
         while (flag):
             if  not transaction_month.isdigit():
-                transaction_month = input('Please enter valid month')
+                transaction_month = input('Please enter valid month:  ')
             else:
                 flag=False
         return(zip_code,transaction_month,transaction_year)
@@ -59,7 +59,7 @@ class functionaldetails():
             
         while flag:
             if transaction_type.title() not in type_lst:
-                transaction_type =input('Invalid transaction_type, Re enter the transaction type:'   )
+                transaction_type =input('Invalid transaction_type, Re enter the transaction type:  '   )
             else:
                 flag=False
         return(transaction_type)
@@ -77,7 +77,7 @@ class functionaldetails():
             state_lst += row
         while flag:
             if branch_state.upper() not in state_lst:
-                branch_state =input('Invalid state, Re enter the state value in the format(XX):'   )
+                branch_state =input('Invalid state, Re enter the state value in the format(XX):   '   )
             else:
                 flag=False
             
@@ -87,7 +87,7 @@ class functionaldetails():
 
         cursor = dbconn.cursor()
         flag = True  
-        ssn = getpass("Enter the last 4 digits :    " )
+        ssn = getpass("Enter the last 4 digits of SSN:    " )
         while flag:
             if not ssn.isdigit() or len(ssn) != 4:
                 ssn =getpass('Invalid ssn, Re enter the ssn without -:    ')
@@ -109,7 +109,7 @@ class functionaldetails():
                 if y_input.lower() == 'y':
                     lastname = input('Enter the lastname:   ')
                 else:
-                    print('The given last name not found in the records')
+                    print('The given last name is not found in the records')
                     return(0,0,0)
             else:
                 flag=False
@@ -129,15 +129,15 @@ class functionaldetails():
         flag=True
         while (flag):
             if not transaction_year.isdigit() or len(transaction_year)!=4:
-                transaction_year = input("Enter valid year format XXXX")
+                transaction_year = input("Enter valid year format XXXX:  ")
             else:
                 flag = False
             
-        transaction_month = input("Enter the month in the form (XX): ").zfill(2)
+        transaction_month = input("Enter the month in the form (XX):  ").zfill(2)
         flag = True
         while (flag):
             if  not transaction_month.isdigit():
-                transaction_month = input('Please enter valid month')
+                transaction_month = input('Please enter valid month:   ')
             else:
                 flag=False
         return(transaction_month,transaction_year)
@@ -150,15 +150,15 @@ class functionaldetails():
         flag=True
         while (flag):
             if not start_date.isdigit() or len(start_date)!=8:
-                transaction_year = input("Enter valid year format XXXXXXXX")
+                transaction_year = input("Enter valid Date format XXXXXXXX[20180516,yearmndy]:   ")
             else:
                 flag = False
             
-        end_date = input("Enter the end date in the form (XXXXXXXX): ")
+        end_date = input("Enter the end date in the form XXXXXXXX[20180516,yearmndy]: ")
         flag = True
         while (flag):
             if not end_date.isdigit() or len(end_date)!=8:
-                transaction_month = input('Please enter valid date in the format XXXXXXXX')
+                transaction_month = input('Please enter valid date in the format XXXXXXXX[20180516,yearmndy]:   ')
             else:
                 flag=False
                 
@@ -167,7 +167,7 @@ class functionaldetails():
             flag=True
             while (flag):
                 if not start_date.isdigit() or len(start_date)!=8:
-                    transaction_year = input("Enter valid year format XXXXXXXX")
+                    transaction_year = input("Enter valid year format XXXXXXXX[20180516,yearmndy]:  ")
                 else:
                     flag = False
 
@@ -175,7 +175,7 @@ class functionaldetails():
             flag = True
             while (flag):
                 if not end_date.isdigit() or len(end_date)!=8:
-                    transaction_month = input('Please enter valid date in the format XXXXXXXX')
+                    transaction_month = input('Please enter valid date in the format XXXXXXXX[20180516,yearmndy]:   ')
                 else:
                     flag=False
         return(start_date,end_date)
@@ -402,14 +402,16 @@ if __name__ == "__main__":
             user = words[1].strip()
         elif (words[0] == "password"):
             password = words[1].strip()
-        else:
-            database = words[1].strip()
     f.close()
+    
     dbconn = fd.get_database_connection(host, database, user, password)
 
     option = '0'
 
     while(option != '8' ):
+        
+        dbconn = fd.get_database_connection(host, database, user, password)
+
         print("\nList of Options:")
         print("----------------")
         print('1)    Used to display the transactions made by customers living in a given zip code for a given month and year. \
