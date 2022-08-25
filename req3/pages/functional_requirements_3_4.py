@@ -36,19 +36,18 @@ spark = SparkSession.builder.appName('req3_data_visual').getOrCreate()
 df = spark.read\
      .format("jdbc")\
      .option("url", "jdbc:mysql://localhost:3306/creditcard_capstone")\
-     .option("dbtable", "creditcard_capstone.cdw_sapp_customer")\
+     .option("dbtable", "creditcard_capstone.cdw_sapp_credit_card")\
      .option("user", user)\
      .option("password", password)\
      .load()
 pd_df_cc = df.toPandas()
 pd_df_cc['MONTHYEAR'] = pd_df_cc['TIMEID'].str[:-2]
-pd_top3 = pd_df_cc.groupby(['MONTHYEAR'])['TRANSACTION_VALUE'].sum().sort_values(ascending=False).head(3).to_frame().reset_index()
+pd_top3 = pd_df_cc.groupby(['MONTHYEAR'])['TRANSACTION_VALUE'].sum().sort_values(ascending=False).head(10).to_frame().reset_index()
 
 fig = px.scatter(pd_top3, x='MONTHYEAR', y='TRANSACTION_VALUE')
 #fig = px.bar(pd_top3, x='MONTHYEAR', y='TRANSACTION_VALUE')
 fig.update_xaxes(type='category')
 #fig.update_yaxes(dtick=25000)
-fig.show()
 
 
 layout = html.Div([
