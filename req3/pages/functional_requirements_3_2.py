@@ -50,3 +50,8 @@ layout = html.Div([
         figure=fig
     )
 ])
+
+fig.update_layout(
+margin=dict(l=30, r=30, t=20, b=30),
+paper_bgcolor="LightSteelBlue",
+)
