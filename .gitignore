@@ -135,3 +135,7 @@ files
 #
 .DS_Store
 .history
+branch.ipynb
+creditcard.ipynb
+customer.ipynb
+loandata.ipynb

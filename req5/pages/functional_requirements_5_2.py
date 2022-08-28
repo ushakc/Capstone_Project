@@ -21,16 +21,8 @@ markdown_text = '''
 Create and plot a chart that shows the difference in application approvals based on Property Area.
 '''
 
-# get the database username and password from secret.txt
-secrets_file = os.path.join("..", "files", "secret.txt")
-with open(secrets_file, "r") as file1:
-    secret_lines = file1.readlines()
-for line in secret_lines:
-    words = line.split("=")
-    if (words[0] == "user"):
-        user = words[1].strip()
-    elif (words[0] == "password"):
-        password = words[1].strip()
+user = os.getenv("user", default=None)
+password = os.getenv("password", default=None)
 
 spark = SparkSession.builder.appName('req5_data_visual').getOrCreate()
 df = spark.read\
@@ -44,12 +36,17 @@ pd_df_loan = df.toPandas()
 pd_df_property = pd_df_loan[['Application_ID','Application_Status','Property_Area']]
 pd_as = pd_df_property.groupby(['Property_Area', 'Application_Status'])['Application_ID'].count().to_frame().reset_index()
 pd_as = pd_as.rename(columns={"Application_ID": "Approved"})
-fig = px.pie(pd_as, values='Approved', names='Property_Area')
+fig = px.pie(pd_as, values='Approved', names='Property_Area', title='Percentage of approved loan applications based on property Area')
+fig2 = px.histogram(pd_df_loan, x='Property_Area',color = 'Application_Status', barmode='group', title= 'Approvals based on area')
 
 layout = html.Div([
     dcc.Markdown(children=markdown_text),
     dcc.Graph(
-        id='req-5-2',
+        id='req-5-2-1',
         figure=fig
-    )
+    ),
+    dcc.Graph(
+        id='req-5-2-2',
+        figure=fig2
+    ),
 ])

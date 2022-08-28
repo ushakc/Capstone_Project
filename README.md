@@ -11,11 +11,27 @@ Manage ETL process and Data Analysis and Visualization for:
 
 ## Configuration
 Created virtual environment for the project. The username and password for the maria db are stored as environment variables and pushed into gitignore
-Install MariaDB
-Install MySQL Workbench
-Install Jupyter Notebook?
+- Install MariaDB
+- Install MySQL Workbench
+- Create MySQL Database
+- Install Spark, Pyspark
+- Setup environment variables for database username and password
 
 ## Execution
+For Module -1 Data Extraction and Visualization of json files:
+#### Before adding the data to the tables, drop the existing tables.
+#### Then set the primary keys and foreign keys
+####  Alter tables to format the columns according to the mapping document
+
+###
+
+For module 2,
+Its Interactive Console program.
+
+```
+python cust_details.py
+
+```
 
 ### Clone repository and copy input files
 - Clone this git repository

@@ -21,16 +21,8 @@ markdown_text = '''
 Find and plot states, showing which state has the highest number of customers
 '''
 
-# get the database username and password from secret.txt
-secrets_file = os.path.join("..", "files", "secret.txt")
-with open(secrets_file, "r") as file1:
-    secret_lines = file1.readlines()
-for line in secret_lines:
-    words = line.split("=")
-    if (words[0] == "user"):
-        user = words[1].strip()
-    elif (words[0] == "password"):
-        password = words[1].strip()
+user = os.getenv("user", default=None)
+password = os.getenv("password", default=None)
 
 spark = SparkSession.builder.appName('req3_data_visual').getOrCreate()
 df = spark.read\
@@ -43,6 +35,12 @@ df = spark.read\
 pd_df = df.toPandas()
 fig = px.histogram(pd_df, y='CUST_STATE')
 
+fig.update_layout(
+    autosize=False,
+    width=1000,
+    height=800,)
+
+
 layout = html.Div([
     dcc.Markdown(children=markdown_text),
     dcc.Graph(
@@ -51,7 +49,3 @@ layout = html.Div([
     )
 ])
 
-fig.update_layout(
-margin=dict(l=30, r=30, t=20, b=30),
-paper_bgcolor="LightSteelBlue",
-)

@@ -22,15 +22,8 @@ Find and plot the top three months with the largest transaction data
 '''
 
 # get the database username and password from secret.txt
-secrets_file = os.path.join("..", "files", "secret.txt")
-with open(secrets_file, "r") as file1:
-    secret_lines = file1.readlines()
-for line in secret_lines:
-    words = line.split("=")
-    if (words[0] == "user"):
-        user = words[1].strip()
-    elif (words[0] == "password"):
-        password = words[1].strip()
+user = os.getenv("user", default=None)
+password = os.getenv("password", default=None)
 
 spark = SparkSession.builder.appName('req3_data_visual').getOrCreate()
 df = spark.read\
