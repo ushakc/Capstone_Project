@@ -1,11 +1,23 @@
-# Capstone_Project
-Data Analysis capstone project 
-This program allows the user to get information about customers and transactions using a program written in Python. 
+# Capstone Project for Data Engineering Boot Camp
+This project is executed as part of Capstone Project for Data Engineering Course from Per Scholas
 
-The data is extracted from JSON files,and transformed using Pyspark, 
-and will be loaded into Mariadb with spark using JDBC API
+## Overview
+Manage ETL process and Data Analysis and Visualization for:
+- Credit Card System
+-  Loan Application System
 
-Created virtual environment for the project. The username and password for the maria db are stored in secret.txt and pushed into gitignore
+## Architecture
+
+
+## Configuration
+Created virtual environment for the project. The username and password for the maria db are stored as environment variables and pushed into gitignore
+
+## Execution
+
+
+
+
+
 
 
 
