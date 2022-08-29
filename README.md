@@ -25,7 +25,8 @@ For Module -1 Data Extraction and Visualization of json files:
 ###
 
 For module 2,
-Its Interactive Console program.
+Its an Interactive Console program. 
+Execute Application , for modules 2.1 and 2.2
 
 ```
 python cust_details.py
