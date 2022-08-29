@@ -82,4 +82,3 @@ python dash_req5.py
 
 
 
-[Architecture.pdf](https://github.com/ushakc/Capstone_Project/files/9441105/Architecture.pdf)
