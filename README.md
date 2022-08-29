@@ -7,7 +7,7 @@ Manage ETL process and Data Analysis and Visualization for:
 -  Loan Application System
 
 ## Architecture
-![My Image]("C:\Users\bkush\projects\Capstone_Project\files\Architecture.pdf")
+![My Image]
 
 ## Configuration
 Created virtual environment for the project. The username and password for the maria db are stored as environment variables and pushed into gitignore
