@@ -7,7 +7,6 @@ Manage ETL process and Data Analysis and Visualization for:
 -  Loan Application System
 
 ## Architecture
-<img src ='files\Architecture.pdf', width = '128'/>
 
 ## Configuration
 Created virtual environment for the project. The username and password for the maria db are stored as environment variables and pushed into gitignore
@@ -83,3 +82,4 @@ python dash_req5.py
 
 
 
+[Architecture.pdf](https://github.com/ushakc/Capstone_Project/files/9441105/Architecture.pdf)
