@@ -18,9 +18,9 @@ Created virtual environment for the project. The username and password for the m
 
 ## Execution
 For Module -1 Data Extraction and Visualization of json files:
-#### Before adding the data to the tables, drop the existing tables.
-#### Then set the primary keys and foreign keys
-####  Alter tables to format the columns according to the mapping document
+##### Before adding the data to the tables, drop the existing tables.
+##### Then set the primary keys and foreign keys
+#####  Alter tables to format the columns according to the mapping document
 
 ###
 
